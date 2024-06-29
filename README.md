@@ -1,3 +1,3 @@
-# calculator_app
+# CalQ
 
-A new Flutter project.
+A calculator app made with Flutter.
