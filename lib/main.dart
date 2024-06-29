@@ -22,18 +22,22 @@ class MainApp extends StatelessWidget {
 
   AppBar _buildAppBar() {
     return AppBar(
-      leading: const Icon(
-        color: Color(0xffa7a7a7),
-        Icons.menu,
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          color: Color(0xffa7a7a7),
+          Icons.menu,
+        ),
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.only(right: 12),
-          child: Icon(
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
             color: Color(0xffa7a7a7),
             Icons.dark_mode_outlined,
           ),
         ),
+        const SizedBox(width: 8),
       ],
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,6 +57,7 @@ class MainApp extends StatelessWidget {
               "Calculator",
             ),
           ),
+          const SizedBox(width: 8),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
