@@ -133,7 +133,7 @@ class ButtonPad extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildButton(
-              text: "+-",
+              text: "+/-",
               onSurfaceColor: const Color(0xff403e4c),
               // onSurfaceColor: Colors.white, // dark
               surfaceColor: Colors.transparent,
