@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/button_pad.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,8 +14,16 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: _buildAppBar(),
-        body: const Center(
-          child: Text('Hello World!'),
+        body: const Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Text('Hello World!'),
+              ),
+            ),
+            ButtonPad(),
+            SizedBox(height: 16),
+          ],
         ),
       ),
     );
