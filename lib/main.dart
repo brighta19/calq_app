@@ -14,16 +14,19 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: _buildAppBar(),
-        body: const Column(
-          children: [
-            Expanded(
-              child: Center(
-                child: Text('Hello World!'),
+        body: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Text('Hello World!'),
+                ),
               ),
-            ),
-            ButtonPad(),
-            SizedBox(height: 16),
-          ],
+              ButtonPad(),
+              SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );
