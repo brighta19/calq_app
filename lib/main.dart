@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/button_pad.dart';
+import 'widgets/calculation_frame.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,11 +19,7 @@ class MainApp extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              Expanded(
-                child: Center(
-                  child: Text('Hello World!'),
-                ),
-              ),
+              Expanded(child: CalculationFrame()),
               ButtonPad(),
               SizedBox(height: 16),
             ],
