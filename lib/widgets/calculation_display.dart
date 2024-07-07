@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CalculationFrame extends StatelessWidget {
-  const CalculationFrame({super.key});
+class CalculationDisplay extends StatelessWidget {
+  const CalculationDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
