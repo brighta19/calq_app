@@ -1,5 +1,5 @@
-import 'package:calq/widgets/calculation_display.dart';
 import 'package:flutter/material.dart';
+import 'widgets/calculator.dart';
 import 'widgets/button_pad.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              Expanded(child: CalculationDisplay()),
+              Expanded(child: Calculator()),
               ButtonPad(),
               SizedBox(height: 16),
             ],

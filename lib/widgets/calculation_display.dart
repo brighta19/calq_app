@@ -1,17 +1,20 @@
+import 'package:calq/calculation.dart';
 import 'package:flutter/material.dart';
 
 class CalculationDisplay extends StatelessWidget {
-  const CalculationDisplay({super.key});
+  const CalculationDisplay({super.key, required this.calculation});
+
+  final Calculation calculation;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          SingleChildScrollView(
+          const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
               style: TextStyle(
@@ -24,10 +27,10 @@ class CalculationDisplay extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 48,
               ),
-              "0",
+              calculation.toString(),
             ),
           ),
         ],
