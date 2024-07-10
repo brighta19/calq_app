@@ -25,6 +25,7 @@ class CalculationDisplay extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
+            reverse: true,
             scrollDirection: Axis.horizontal,
             child: Text(
               style: const TextStyle(
