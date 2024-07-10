@@ -1,41 +1,50 @@
 import 'package:calq/button_pad_input.dart';
+import 'number_input.dart';
 
 class Calculation {
-  String _calculationString = "";
+  NumberInput firstNumber = NumberInput();
 
   update(ButtonPadInput input) {
     switch (input) {
       case ButtonPadInput.allClear:
-        _calculationString = "";
+        firstNumber = NumberInput();
       case ButtonPadInput.backspace:
-        if (_calculationString.isNotEmpty) {
-          _calculationString =
-              _calculationString.substring(0, _calculationString.length - 1);
-        }
+        try {
+          firstNumber.removeRightmostDigit();
+        } catch (_) {}
+      case ButtonPadInput.percent:
+        firstNumber.togglePercentage();
+      case ButtonPadInput.negate:
+        firstNumber.negate();
+      case ButtonPadInput.decimalPoint:
+        try {
+          firstNumber.addDecimalPoint();
+        } catch (_) {}
+
       case ButtonPadInput.zero:
-        _calculationString += "0";
+        firstNumber.addDigit(0);
       case ButtonPadInput.one:
-        _calculationString += "1";
+        firstNumber.addDigit(1);
       case ButtonPadInput.two:
-        _calculationString += "2";
+        firstNumber.addDigit(2);
       case ButtonPadInput.three:
-        _calculationString += "3";
+        firstNumber.addDigit(3);
       case ButtonPadInput.four:
-        _calculationString += "4";
+        firstNumber.addDigit(4);
       case ButtonPadInput.five:
-        _calculationString += "5";
+        firstNumber.addDigit(5);
       case ButtonPadInput.six:
-        _calculationString += "6";
+        firstNumber.addDigit(6);
       case ButtonPadInput.seven:
-        _calculationString += "7";
+        firstNumber.addDigit(7);
       case ButtonPadInput.eight:
-        _calculationString += "8";
+        firstNumber.addDigit(8);
       case ButtonPadInput.nine:
-        _calculationString += "9";
+        firstNumber.addDigit(9);
       default:
     }
   }
 
   @override
-  String toString() => _calculationString;
+  String toString() => firstNumber.toString();
 }

@@ -28,7 +28,6 @@ class _CalculatorState extends State<Calculator> {
         ),
         ButtonPad(
           onPadInput: (input) {
-            debugPrint(input.name);
             setState(() => calculation.update(input));
           },
         ),
