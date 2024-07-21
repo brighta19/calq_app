@@ -41,25 +41,25 @@ class Calculation {
         _setOperation(Operation.division);
 
       case ButtonPadInput.zero:
-        _firstNumber.addDigit(0);
+        _firstNumber.insertDigit(0);
       case ButtonPadInput.one:
-        _firstNumber.addDigit(1);
+        _firstNumber.insertDigit(1);
       case ButtonPadInput.two:
-        _firstNumber.addDigit(2);
+        _firstNumber.insertDigit(2);
       case ButtonPadInput.three:
-        _firstNumber.addDigit(3);
+        _firstNumber.insertDigit(3);
       case ButtonPadInput.four:
-        _firstNumber.addDigit(4);
+        _firstNumber.insertDigit(4);
       case ButtonPadInput.five:
-        _firstNumber.addDigit(5);
+        _firstNumber.insertDigit(5);
       case ButtonPadInput.six:
-        _firstNumber.addDigit(6);
+        _firstNumber.insertDigit(6);
       case ButtonPadInput.seven:
-        _firstNumber.addDigit(7);
+        _firstNumber.insertDigit(7);
       case ButtonPadInput.eight:
-        _firstNumber.addDigit(8);
+        _firstNumber.insertDigit(8);
       case ButtonPadInput.nine:
-        _firstNumber.addDigit(9);
+        _firstNumber.insertDigit(9);
 
       case ButtonPadInput.equate:
         throw Exception("Not yet implemented");

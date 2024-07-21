@@ -5,7 +5,7 @@ class NumberInput {
 
   bool get _hasDecimalPoint => _numberStr.contains('.');
 
-  void addDigit(int digit) {
+  void insertDigit(int digit) {
     if (_numberStr == "0") {
       if (digit != 0) {
         _numberStr = digit.toString();
