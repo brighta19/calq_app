@@ -1,50 +1,56 @@
-import 'package:calq/button_pad_input.dart';
+import 'button_pad_input.dart';
+import 'operation_input.dart';
 import 'number_input.dart';
 
 class Calculation {
-  NumberInput firstNumber = NumberInput();
+  NumberInput _firstNumber = NumberInput();
+  OperationInput _operation = OperationInput(operation: Operation.addition);
+  NumberInput _secondNumber = NumberInput();
 
   update(ButtonPadInput input) {
     switch (input) {
       case ButtonPadInput.allClear:
-        firstNumber = NumberInput();
+        _firstNumber = NumberInput();
       case ButtonPadInput.backspace:
         try {
-          firstNumber.removeRightmostDigit();
+          _firstNumber.removeRightmostDigit();
         } catch (_) {}
       case ButtonPadInput.percent:
-        firstNumber.togglePercentage();
+        _firstNumber.togglePercentage();
       case ButtonPadInput.negate:
-        firstNumber.negate();
+        _firstNumber.negate();
       case ButtonPadInput.decimalPoint:
         try {
-          firstNumber.addDecimalPoint();
+          _firstNumber.addDecimalPoint();
         } catch (_) {}
 
       case ButtonPadInput.zero:
-        firstNumber.addDigit(0);
+        _firstNumber.addDigit(0);
       case ButtonPadInput.one:
-        firstNumber.addDigit(1);
+        _firstNumber.addDigit(1);
       case ButtonPadInput.two:
-        firstNumber.addDigit(2);
+        _firstNumber.addDigit(2);
       case ButtonPadInput.three:
-        firstNumber.addDigit(3);
+        _firstNumber.addDigit(3);
       case ButtonPadInput.four:
-        firstNumber.addDigit(4);
+        _firstNumber.addDigit(4);
       case ButtonPadInput.five:
-        firstNumber.addDigit(5);
+        _firstNumber.addDigit(5);
       case ButtonPadInput.six:
-        firstNumber.addDigit(6);
+        _firstNumber.addDigit(6);
       case ButtonPadInput.seven:
-        firstNumber.addDigit(7);
+        _firstNumber.addDigit(7);
       case ButtonPadInput.eight:
-        firstNumber.addDigit(8);
+        _firstNumber.addDigit(8);
       case ButtonPadInput.nine:
-        firstNumber.addDigit(9);
+        _firstNumber.addDigit(9);
       default:
     }
   }
 
-  @override
-  String toString() => firstNumber.toString();
+  String get firstNumber => _firstNumber.toString();
+  String get fullExpression =>
+      _firstNumber.toString() +
+      _operation.toString() +
+      _secondNumber.toString();
 }

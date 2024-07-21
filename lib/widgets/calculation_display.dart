@@ -1,10 +1,28 @@
 import 'package:calq/calculation.dart';
 import 'package:flutter/material.dart';
 
-class CalculationDisplay extends StatelessWidget {
-  const CalculationDisplay({super.key, required this.calculation});
+enum _CalculationViewOptions {
+  firstNumber,
+  fullExpression,
+}
 
-  final Calculation calculation;
+class CalculationDisplay extends StatelessWidget {
+  const CalculationDisplay({super.key, required Calculation calculation})
+      : _calculation = calculation;
+
+  final Calculation _calculation;
+
+  final _CalculationViewOptions _calculationViewOptions =
+      _CalculationViewOptions.firstNumber;
+
+  String get _calculationView {
+    switch (_calculationViewOptions) {
+      case _CalculationViewOptions.firstNumber:
+        return _calculation.firstNumber;
+      case _CalculationViewOptions.fullExpression:
+        return _calculation.fullExpression;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +49,7 @@ class CalculationDisplay extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 48,
               ),
-              calculation.toString(),
+              _calculationView,
             ),
           ),
         ],
