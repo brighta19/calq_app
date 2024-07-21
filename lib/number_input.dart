@@ -16,7 +16,7 @@ class NumberInput {
   }
 
   void removeRightmostDigit() {
-    if (_numberStr.isEmpty) {
+    if (_numberStr.isEmpty || _numberStr == "0") {
       throw Exception("There are no digits to remove");
     } else {
       _numberStr = _numberStr.substring(0, _numberStr.length - 1);

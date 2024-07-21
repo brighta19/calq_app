@@ -12,17 +12,12 @@ class OperationInput {
 
   @override
   String toString() {
-    switch (operation) {
-      case Operation.addition:
-        return '+';
-      case Operation.subtraction:
-        return '−';
-      case Operation.multiplication:
-        return '×';
-      case Operation.division:
-        return '÷';
-      default:
-        throw Exception("Operation not set");
-    }
+    return switch (operation) {
+      Operation.addition => '+',
+      Operation.subtraction => '−',
+      Operation.multiplication => '×',
+      Operation.division => '÷',
+      _ => throw Exception("Operation not set")
+    };
   }
 }
