@@ -6,9 +6,9 @@ enum Operation {
 }
 
 class OperationInput {
-  OperationInput({required this.operation});
+  OperationInput();
 
-  Operation operation;
+  Operation? operation;
 
   @override
   String toString() {
@@ -16,11 +16,13 @@ class OperationInput {
       case Operation.addition:
         return '+';
       case Operation.subtraction:
-        return '-';
+        return '−';
       case Operation.multiplication:
-        return '*';
+        return '×';
       case Operation.division:
-        return '/';
+        return '÷';
+      default:
+        throw Exception("Operation not set");
     }
   }
 }

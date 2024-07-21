@@ -4,25 +4,41 @@ import 'number_input.dart';
 
 class Calculation {
   NumberInput _firstNumber = NumberInput();
-  OperationInput _operation = OperationInput(operation: Operation.addition);
+  OperationInput _operationInput = OperationInput();
   NumberInput _secondNumber = NumberInput();
+
+  bool get _isOperationSet {
+    try {
+      _operationInput.toString();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool get showFullExpression => _isOperationSet;
 
   update(ButtonPadInput input) {
     switch (input) {
       case ButtonPadInput.allClear:
-        _firstNumber = NumberInput();
+        _clearInput();
       case ButtonPadInput.backspace:
-        try {
-          _firstNumber.removeRightmostDigit();
-        } catch (_) {}
+        _tryRemovingDigit();
       case ButtonPadInput.percent:
-        _firstNumber.togglePercentage();
+        _togglePercentage();
       case ButtonPadInput.negate:
-        _firstNumber.negate();
+        _negateNumber();
       case ButtonPadInput.decimalPoint:
-        try {
-          _firstNumber.addDecimalPoint();
-        } catch (_) {}
+        _tryAddingDecimalPoint();
+
+      case ButtonPadInput.add:
+        _setOperation(Operation.addition);
+      case ButtonPadInput.subtract:
+        _setOperation(Operation.subtraction);
+      case ButtonPadInput.multiply:
+        _setOperation(Operation.multiplication);
+      case ButtonPadInput.divide:
+        _setOperation(Operation.division);
 
       case ButtonPadInput.zero:
         _firstNumber.addDigit(0);
@@ -44,13 +60,54 @@ class Calculation {
         _firstNumber.addDigit(8);
       case ButtonPadInput.nine:
         _firstNumber.addDigit(9);
-      default:
+
+      case ButtonPadInput.equate:
+        throw Exception("Not yet implemented");
     }
+  }
+
+  _clearInput() {
+    _firstNumber = NumberInput();
+    _operationInput = OperationInput();
+    _secondNumber = NumberInput();
+  }
+
+  _tryRemovingDigit() {
+    try {
+      _firstNumber.removeRightmostDigit();
+    } catch (_) {}
+  }
+
+  _tryAddingDecimalPoint() {
+    try {
+      _firstNumber.addDecimalPoint();
+    } catch (_) {}
+  }
+
+  _togglePercentage() {
+    _firstNumber.togglePercentage();
+  }
+
+  _negateNumber() {
+    _firstNumber.negate();
+  }
+
+  _setOperation(Operation operation) {
+    _operationInput.operation = operation;
   }
 
   String get firstNumber => _firstNumber.toString();
   String get fullExpression =>
       _firstNumber.toString() +
-      _operation.toString() +
+      _operationInput.toString() +
       _secondNumber.toString();
+
+  @override
+  String toString() {
+    if (showFullExpression) {
+      return fullExpression;
+    } else {
+      return firstNumber;
+    }
+  }
 }
