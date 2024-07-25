@@ -1,6 +1,6 @@
-import 'button_pad_input.dart';
-import 'operation_input.dart';
-import 'number_input.dart';
+import 'package:calq/button_pad_input.dart';
+import 'package:calq/number_input.dart';
+import 'package:calq/operation_input.dart';
 
 class NumberMapping {
   static int toDigit(ButtonPadInput input) {
@@ -21,9 +21,15 @@ class NumberMapping {
 }
 
 class Calculation {
-  NumberInput _firstNumber = NumberInput();
-  OperationInput _operationInput = OperationInput();
-  NumberInput _secondNumber = NumberInput();
+  Calculation({num? firstNumber, Operation? operation, num? secondNumber}) {
+    _firstNumber = NumberInput(firstNumber);
+    _operationInput = OperationInput(operation);
+    _secondNumber = NumberInput(secondNumber);
+  }
+
+  late NumberInput _firstNumber;
+  late OperationInput _operationInput;
+  late NumberInput _secondNumber;
 
   bool get _isOperationSet {
     try {
@@ -41,62 +47,28 @@ class Calculation {
 
   String get firstNumber => _firstNumber.toString();
 
-  String get fullExpression =>
-      _firstNumber.toString() +
-      _operationInput.toString() +
-      _secondNumber.toString();
+  String get fullExpression => "$_firstNumber$_operationInput$_secondNumber";
 
-  update(ButtonPadInput input) {
-    switch (input) {
-      case ButtonPadInput.allClear:
-        _clearInput();
-      case ButtonPadInput.backspace:
-        _tryRemoveDigitOrOperation();
-      case ButtonPadInput.percent:
-        _togglePercentage();
-      case ButtonPadInput.negate:
-        _negateNumber();
-      case ButtonPadInput.decimalPoint:
-        _tryAddingDecimalPoint();
-
-      case ButtonPadInput.add:
-        _setOperation(Operation.addition);
-      case ButtonPadInput.subtract:
-        _setOperation(Operation.subtraction);
-      case ButtonPadInput.multiply:
-        _setOperation(Operation.multiplication);
-      case ButtonPadInput.divide:
-        _setOperation(Operation.division);
-
-      case ButtonPadInput.zero ||
-            ButtonPadInput.one ||
-            ButtonPadInput.two ||
-            ButtonPadInput.three ||
-            ButtonPadInput.four ||
-            ButtonPadInput.five ||
-            ButtonPadInput.six ||
-            ButtonPadInput.seven ||
-            ButtonPadInput.eight ||
-            ButtonPadInput.nine:
-        _insertDigitFromButtonPad(input);
-
-      case ButtonPadInput.equate:
-        throw Exception("Not yet implemented");
-    }
+  _removeOperation() {
+    setOperation(null);
   }
 
-  _insertDigitFromButtonPad(ButtonPadInput input) {
+  _resetSecondNumber() {
+    _secondNumber = NumberInput();
+  }
+
+  insertDigitFromButtonPad(ButtonPadInput input) {
     int digit = NumberMapping.toDigit(input);
     _activeNumber.insertDigit(digit);
   }
 
-  _clearInput() {
+  clearInput() {
     _firstNumber = NumberInput();
     _operationInput = OperationInput();
     _secondNumber = NumberInput();
   }
 
-  _tryRemoveDigitOrOperation() {
+  tryToRemoveDigitOrOperation() {
     try {
       _activeNumber.removeRightmostDigit();
     } catch (_) {
@@ -107,30 +79,36 @@ class Calculation {
     }
   }
 
-  _removeOperation() {
-    _setOperation(null);
-  }
-
-  _tryAddingDecimalPoint() {
+  tryAddingDecimalPoint() {
     try {
       _activeNumber.addDecimalPoint();
     } catch (_) {}
   }
 
-  _togglePercentage() {
+  togglePercentage() {
     _activeNumber.togglePercentage();
   }
 
-  _negateNumber() {
+  negateNumber() {
     _activeNumber.negate();
   }
 
-  _setOperation(Operation? operation) {
+  setOperation(Operation? operation) {
     _operationInput.operation = operation;
   }
 
-  _resetSecondNumber() {
-    _secondNumber = NumberInput();
+  num calculate() {
+    num firstNumber = _firstNumber.toNum();
+    num secondNumber = _secondNumber.toNum();
+    Operation? operation = _operationInput.operation;
+
+    return switch (operation) {
+      Operation.addition => firstNumber + secondNumber,
+      Operation.subtraction => firstNumber - secondNumber,
+      Operation.multiplication => firstNumber * secondNumber,
+      Operation.division => firstNumber / secondNumber,
+      _ => throw Exception("Operation not implemented"),
+    };
   }
 
   @override

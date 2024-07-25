@@ -1,7 +1,7 @@
+import 'package:calq/theme.dart';
+import 'package:calq/widgets/calculator.dart';
+import 'package:calq/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
-import 'theme.dart';
-import 'widgets/calculator.dart';
-import 'widgets/top_bar.dart';
 
 void main() {
   runApp(const MainApp());

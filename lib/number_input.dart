@@ -1,9 +1,24 @@
 class NumberInput {
-  String _numberStr = "0";
+  NumberInput([num? initialNumber]) {
+    if (initialNumber != null) {
+      _initializeWithNumber(initialNumber);
+    } else {
+      _numberStr = "0";
+    }
+  }
+
+  late String _numberStr;
   bool _isNegative = false;
   bool _isAPercentage = false;
 
   bool get _hasDecimalPoint => _numberStr.contains('.');
+
+  void _initializeWithNumber(number) {
+    _isNegative = number < 0;
+
+    var positiveNumber = number.abs();
+    _numberStr = positiveNumber.toString();
+  }
 
   void insertDigit(int digit) {
     if (_numberStr == "0") {
@@ -40,11 +55,11 @@ class NumberInput {
   String toString() =>
       (_isNegative ? '-' : '') + _numberStr + (_isAPercentage ? '%' : '');
 
-  int toInt() {
+  num toNum() {
     String str = (_isNegative ? '-' : '') + _numberStr;
-    int number = int.parse(str);
+    num number = num.parse(str);
     if (_isAPercentage) {
-      number / 100;
+      number /= 100;
     }
     return number;
   }

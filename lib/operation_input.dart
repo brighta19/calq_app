@@ -6,7 +6,7 @@ enum Operation {
 }
 
 class OperationInput {
-  OperationInput();
+  OperationInput([this.operation]);
 
   Operation? operation;
 
